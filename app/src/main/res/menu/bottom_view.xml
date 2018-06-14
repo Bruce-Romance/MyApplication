@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bnv_function"
+        android:icon="@drawable/number_1"
+        android:title="劫" />
+
+    <item
+        android:id="@+id/bnv_query"
+        android:icon="@drawable/number_2"
+        android:title="亚索" />
+
+    <item
+        android:id="@+id/bnv_forms"
+        android:icon="@drawable/number_3"
+        android:title="卡兹克" />
+
+    <item
+        android:id="@+id/bnv_setting"
+        android:icon="@drawable/number_4"
+        android:title="雷恩加尔" />
+</menu>
