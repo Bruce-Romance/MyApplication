@@ -24,12 +24,7 @@ public class PermissionsUtils {
         }
 
         /**
-         * Determine whether <em>you</em> have been granted a particular permission.
-         *
-         * @param permission The name of the permission being checked.
-         * @return {@link PackageManager#PERMISSION_GRANTED} if you have the
-         * permission, or {@link PackageManager#PERMISSION_DENIED} if not.
-         * @see PackageManager#checkPermission(String, String)
+         * 添加权限.
          */
         public Builder addPermission(@NonNull String permission) {
             if (!permissionList.contains(permission)) {
@@ -38,6 +33,11 @@ public class PermissionsUtils {
             return this;
         }
 
+        /**
+         * 如果没有权限将去申请
+         *
+         * @return
+         */
         public List<String> initPermission() {
             List<String> list = new ArrayList<>();
             for (String permission : permissionList) {
@@ -50,6 +50,5 @@ public class PermissionsUtils {
             }
             return list;
         }
-
     }
 }
