@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import Bean.MainBean;
 import adapter.MainAdapter;
-import tao.pangu.RecyclerUtils;
+import recyclerView.RecyclerUtils;
 
 /**
  * @author YT

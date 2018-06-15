@@ -1,4 +1,4 @@
-package tao.pangu;
+package log;
 
 import android.util.Log;
 

@@ -1,4 +1,4 @@
-package tao.pangu;
+package toast;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import tao.pangu.PanGu;
+import tao.pangu.R;
 
 
 /**

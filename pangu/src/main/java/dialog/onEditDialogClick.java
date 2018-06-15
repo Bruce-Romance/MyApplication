@@ -1,4 +1,4 @@
-package tao.pangu;
+package dialog;
 
 import android.app.Dialog;
 import android.widget.EditText;

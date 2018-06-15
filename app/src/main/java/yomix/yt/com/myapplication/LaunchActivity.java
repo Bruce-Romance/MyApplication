@@ -1,11 +1,10 @@
 package yomix.yt.com.myapplication;
 
-import android.animation.Animator;
 import android.app.Activity;
 import android.os.Bundle;
 
 
-import tao.pangu.IntentUtils;
+import intent.IntentUtils;
 
 public class LaunchActivity extends Activity {
 

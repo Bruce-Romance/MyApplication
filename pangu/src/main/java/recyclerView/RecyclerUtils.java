@@ -1,4 +1,4 @@
-package tao.pangu;
+package recyclerView;
 
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;

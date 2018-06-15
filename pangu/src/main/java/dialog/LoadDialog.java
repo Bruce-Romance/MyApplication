@@ -1,4 +1,4 @@
-package tao.pangu;
+package dialog;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
+import tao.pangu.R;
 
 public class LoadDialog extends PanGuDialog {
     private LottieAnimationView lottieView;

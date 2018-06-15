@@ -6,12 +6,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
-import tao.pangu.DialogUtils;
-import tao.pangu.LoadDialog;
-import tao.pangu.MessageDialog;
-import tao.pangu.ToastUtils;
-import tao.pangu.onEditDialogClick;
-import tao.pangu.onMessageDialogClick;
+import dialog.DialogUtils;
+import dialog.MessageDialog;
+import toast.ToastUtils;
+import dialog.onEditDialogClick;
+import dialog.onMessageDialogClick;
 
 public class DialogActivity extends AppCompatActivity {
 

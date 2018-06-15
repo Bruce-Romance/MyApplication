@@ -1,4 +1,5 @@
-package tao.pangu;
+package dialog;
+
 
 public interface onMessageDialogClick {
     void confirm(MessageDialog dialog);

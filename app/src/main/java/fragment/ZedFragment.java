@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import tao.pangu.IntentUtils;
+
+import intent.IntentUtils;
 import yomix.yt.com.myapplication.DialogActivity;
+import yomix.yt.com.myapplication.PermissionActivity;
 import yomix.yt.com.myapplication.PrintTableActivity;
 import yomix.yt.com.myapplication.R;
 import yomix.yt.com.myapplication.RecyclerActivity;
@@ -65,6 +67,13 @@ public class ZedFragment extends BaseFragment {
                 public void onClick(View v) {
                     //dialog展示
                     IntentUtils.skipIntent(getActivity(), DialogActivity.class, false);
+                }
+            });
+            view.findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //权限申请
+                    IntentUtils.skipIntent(getActivity(), PermissionActivity.class, false);
                 }
             });
         }

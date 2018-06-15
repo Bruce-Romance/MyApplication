@@ -1,4 +1,4 @@
-package tao.pangu;
+package intent;
 
 import android.app.Activity;
 import android.content.Intent;
