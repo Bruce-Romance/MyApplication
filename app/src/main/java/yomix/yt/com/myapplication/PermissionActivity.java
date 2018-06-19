@@ -3,25 +3,43 @@ package yomix.yt.com.myapplication;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import dialog.DialogUtils;
 import dialog.MessageDialog;
 import dialog.onMessageDialogClick;
 import permission.PermissionsUtils;
 import toast.ToastUtils;
+import util.FileProvider7;
 
 public class PermissionActivity extends AppCompatActivity {
+
+    private static final int REQUEST_CODE_TAKE_PHOTO = 0x110;
+    private String mCurrentPhotoPath;
+    private ImageView mIvPhoto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_permission);
+        mIvPhoto = findViewById(R.id.mIvPhoto);
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,9 +65,38 @@ public class PermissionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //拍照
-                ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+                if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                } else {
+                    takePhoto();
+                }
             }
         });
+    }
+
+    /**
+     * 拍照
+     */
+    private void takePhoto() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
+
+            String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA).format(new Date()) + ".png";
+            File file = new File(Environment.getExternalStorageDirectory(), filename);
+            mCurrentPhotoPath = file.getAbsolutePath();
+            Uri fileUri = FileProvider.getUriForFile(this, "com.myapplication.fileprovider", file);
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
+            startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_TAKE_PHOTO) {
+//            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
+            mIvPhoto.setImageURI(Uri.parse(mCurrentPhotoPath));
+        }
     }
 
     @Override
@@ -78,6 +125,9 @@ public class PermissionActivity extends AppCompatActivity {
             } else {
                 ToastUtils.success("允许权限");
             }
+        }
+        if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            takePhoto();
         }
     }
 }

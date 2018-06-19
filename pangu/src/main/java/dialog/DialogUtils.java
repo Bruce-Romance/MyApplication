@@ -60,6 +60,7 @@ public class DialogUtils {
         loadDialog.getLottieView().loop(true);
         loadDialog.setCanceledOnTouchOutside(false);
         loadDialog.setCancelable(false);
+        loadDialog.show();
         return loadDialog;
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="yomix.yt.com.myapplication">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,6 +9,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".MyApplication"
@@ -36,7 +38,19 @@
         <activity android:name=".DialogActivity" />
         <activity android:name=".PermissionActivity" />
         <activity android:name=".ReverseActivity" />
-        <activity android:name=".IdCardActivity"></activity>
+        <activity android:name=".IdCardActivity"/>
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.myapplication.fileprovider"
+            android:exported="false"
+            tools:replace="android:authorities"
+            android:grantUriPermissions="true">
+            <meta-data
+
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                />
+        </provider>
     </application>
 
 </manifest>

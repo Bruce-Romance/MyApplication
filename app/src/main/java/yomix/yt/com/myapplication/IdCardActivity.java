@@ -8,12 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
 import Bean.IdCard;
+import dialog.DialogUtils;
+import dialog.LoadDialog;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class IdCardActivity extends AppCompatActivity {
 
+    LoadDialog loadDialog;
 
     public interface requestInfo {
         void response(IdCard idCard);
@@ -24,9 +27,11 @@ public class IdCardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_card);
         final TextView person = findViewById(R.id.tv_person_info);
+        final DialogUtils utils = new DialogUtils();
         findViewById(R.id.btn_query).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                loadDialog = utils.loadDialog(IdCardActivity.this, R.style.PanGuDialog);
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -37,13 +42,14 @@ public class IdCardActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         person.setText(idCard.getArea() + "\n" + idCard.getSex() + "\n" + idCard.getBirthday());
+                                        loadDialog.getLottieView().loop(false);
+                                        loadDialog.dismiss();
                                     }
                                 });
                             }
                         });
                     }
                 }).start();
-
             }
         });
     }
