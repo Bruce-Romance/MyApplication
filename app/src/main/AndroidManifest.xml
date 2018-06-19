@@ -6,8 +6,8 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".MyApplication"
@@ -34,7 +34,9 @@
         </activity>
         <activity android:name=".RfidActivity" />
         <activity android:name=".DialogActivity" />
-        <activity android:name=".PermissionActivity"></activity>
+        <activity android:name=".PermissionActivity" />
+        <activity android:name=".ReverseActivity" />
+        <activity android:name=".IdCardActivity"></activity>
     </application>
 
 </manifest>

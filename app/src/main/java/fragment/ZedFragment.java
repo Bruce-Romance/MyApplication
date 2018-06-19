@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 
 import intent.IntentUtils;
 import yomix.yt.com.myapplication.DialogActivity;
+import yomix.yt.com.myapplication.IdCardActivity;
 import yomix.yt.com.myapplication.PermissionActivity;
 import yomix.yt.com.myapplication.PrintTableActivity;
 import yomix.yt.com.myapplication.R;
 import yomix.yt.com.myapplication.RecyclerActivity;
+import yomix.yt.com.myapplication.ReverseActivity;
 import yomix.yt.com.myapplication.RfidActivity;
 import yomix.yt.com.myapplication.RxActivity;
 
@@ -74,6 +76,20 @@ public class ZedFragment extends BaseFragment {
                 public void onClick(View v) {
                     //权限申请
                     IntentUtils.skipIntent(getActivity(), PermissionActivity.class, false);
+                }
+            });
+            view.findViewById(R.id.btn_change_str).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //逆转字符串
+                    IntentUtils.skipIntent(getActivity(), ReverseActivity.class, false);
+                }
+            });
+            view.findViewById(R.id.btn_idCard).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //身份证查询
+                    IntentUtils.skipIntent(getActivity(), IdCardActivity.class, false);
                 }
             });
         }
