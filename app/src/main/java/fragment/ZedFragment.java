@@ -17,6 +17,7 @@ import yomix.yt.com.myapplication.RecyclerActivity;
 import yomix.yt.com.myapplication.ReverseActivity;
 import yomix.yt.com.myapplication.RfidActivity;
 import yomix.yt.com.myapplication.RxActivity;
+import yomix.yt.com.myapplication.SongCiActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -90,6 +91,13 @@ public class ZedFragment extends BaseFragment {
                 public void onClick(View v) {
                     //身份证查询
                     IntentUtils.skipIntent(getActivity(), IdCardActivity.class, false);
+                }
+            });
+            view.findViewById(R.id.btn_songci).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //宋词
+                    IntentUtils.skipIntent(getActivity(), SongCiActivity.class, false);
                 }
             });
         }

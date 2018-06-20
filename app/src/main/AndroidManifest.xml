@@ -38,18 +38,20 @@
         <activity android:name=".DialogActivity" />
         <activity android:name=".PermissionActivity" />
         <activity android:name=".ReverseActivity" />
-        <activity android:name=".IdCardActivity"/>
+        <activity android:name=".IdCardActivity" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.myapplication.fileprovider"
             android:exported="false"
-            tools:replace="android:authorities"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths"
-                />
+                android:resource="@xml/file_paths" />
         </provider>
+
+        <activity android:name=".SongCiActivity"></activity>
     </application>
 
 </manifest>
