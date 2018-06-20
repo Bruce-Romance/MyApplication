@@ -13,7 +13,7 @@
 
     <external-path
         name="external"
-        path="" />
+        path="pics" />
 
     <external-files-path
         name="external_file_path"

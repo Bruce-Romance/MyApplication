@@ -10,24 +10,20 @@ import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-
 import dialog.DialogUtils;
 import dialog.MessageDialog;
 import dialog.onMessageDialogClick;
 import permission.PermissionsUtils;
 import toast.ToastUtils;
-import util.FileProvider7;
+import permission.FileProvider7;
 
 public class PermissionActivity extends AppCompatActivity {
 
@@ -66,7 +62,7 @@ public class PermissionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //拍照
                 if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    ActivityCompat.requestPermissions(PermissionActivity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 } else {
                     takePhoto();
                 }
@@ -84,7 +80,8 @@ public class PermissionActivity extends AppCompatActivity {
             String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA).format(new Date()) + ".png";
             File file = new File(Environment.getExternalStorageDirectory(), filename);
             mCurrentPhotoPath = file.getAbsolutePath();
-            Uri fileUri = FileProvider.getUriForFile(this, "com.myapplication.fileprovider", file);
+//            Uri fileUri = FileProvider.getUriForFile(this, "com.myapplication.fileprovider", file);
+            Uri fileUri = FileProvider7.getUriForFile(this,file);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
             startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);
         }
@@ -94,8 +91,8 @@ public class PermissionActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_TAKE_PHOTO) {
-//            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
-            mIvPhoto.setImageURI(Uri.parse(mCurrentPhotoPath));
+            mIvPhoto.setImageBitmap(BitmapFactory.decodeFile(mCurrentPhotoPath));
+//            mIvPhoto.setImageURI(Uri.parse(mCurrentPhotoPath));
         }
     }
 
@@ -124,10 +121,11 @@ public class PermissionActivity extends AppCompatActivity {
                 }
             } else {
                 ToastUtils.success("允许权限");
+                if (i == grantResults.length-1) {
+                    takePhoto();
+                }
             }
         }
-        if (ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(PermissionActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
-            takePhoto();
-        }
+
     }
 }
