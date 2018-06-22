@@ -18,7 +18,7 @@ public class IdCardActivity extends AppCompatActivity {
 
     LoadDialog loadDialog;
 
-    public interface requestInfo {
+    private interface requestInfo {
         void response(IdCard idCard);
     }
 
