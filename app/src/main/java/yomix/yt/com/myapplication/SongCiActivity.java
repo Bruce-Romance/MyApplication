@@ -5,13 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import org.greenrobot.greendao.query.Query;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import Bean.SongCi;
 import Bean.SongCiDao;
@@ -49,6 +47,7 @@ public class SongCiActivity extends AppCompatActivity {
         content = findViewById(R.id.tv_content);
         editText = findViewById(R.id.edit_content);
         final DialogUtils utils = new DialogUtils();
+
         //查出最后一条数据
         Long count = Dao.getInstance().getDaoSession().getSongCiDao().queryBuilder().count();
         SongCi songCi = Dao.getInstance().getDaoSession().getSongCiDao().load(count - 1);
@@ -119,7 +118,9 @@ public class SongCiActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        loadDialog.dismiss();
+        if (loadDialog != null) {
+            loadDialog.dismiss();
+        }
     }
 
     private void requestSongCi(songCiCallBack callBack) {
