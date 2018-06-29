@@ -10,7 +10,7 @@ import android.widget.FilterQueryProvider;
 import android.widget.Filterable;
 import android.widget.TextView;
 
-import yomix.yt.com.myapplication.BarCodeBusiness;
+import business.BarCodeBusiness;
 
 public class AutoAdapter extends CursorAdapter implements Filterable {
 

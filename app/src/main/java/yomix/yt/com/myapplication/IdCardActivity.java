@@ -17,6 +17,7 @@ import com.lemap.scanner.Scannable;
 
 import Bean.BaseBarCode;
 import adapter.AutoAdapter;
+import business.BarCodeBusiness;
 import toast.ToastUtils;
 
 

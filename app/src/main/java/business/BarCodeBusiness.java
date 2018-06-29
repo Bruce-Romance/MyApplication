@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package business;
 
 import android.database.Cursor;
 import android.database.SQLException;
@@ -26,6 +26,7 @@ import java.util.List;
 
 import Bean.BaseBarCode;
 import Bean.BaseDownload;
+import data.AppConfig;
 import util.ClsUtils;
 import util.FileHelper;
 

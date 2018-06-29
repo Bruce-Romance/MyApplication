@@ -4,9 +4,6 @@ import com.lemap.dataaccess.Column;
 
 public class BaseDownload extends BaseBusinessBean {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "RemoteFileUrl")
