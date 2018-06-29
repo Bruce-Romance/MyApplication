@@ -3,7 +3,6 @@ package Thread;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -41,7 +40,6 @@ public class ThreadUtils {
             return sHandler;
         }
     }
-
 
     private static class InternalHandler extends Handler {
         public InternalHandler() {

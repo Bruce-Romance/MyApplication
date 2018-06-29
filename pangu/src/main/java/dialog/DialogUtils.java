@@ -3,6 +3,8 @@ package dialog;
 import android.app.Activity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 /**
  * @author YT
@@ -98,5 +100,28 @@ public class DialogUtils {
             }
         });
         messageDialog.show();
+    }
+
+    public static void chooseDialog(Activity activity, String[] items, String title, String message, final onChooseDialogClick click) {
+        final ChooseDialog dialog = new ChooseDialog(activity);
+        dialog.getTvTitle().setText(title);
+        dialog.getTvMessage().setText(message);
+        for (int i = 0; i < items.length; i++) {
+            RadioButton radioButton = new RadioButton(activity);
+            radioButton.setText(items[i]);
+            dialog.getRadioGroup().addView(radioButton, i);
+        }
+        final RadioGroup radioGroup = dialog.getRadioGroup();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton rb = dialog.findViewById(radioGroup.getCheckedRadioButtonId());
+                click.onClick(rb.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.show();
     }
 }

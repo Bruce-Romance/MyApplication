@@ -44,6 +44,7 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'com.github.vondear:RxTools:v1.7.6.4'
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     implementation project(':pangu')
     //最低支持API16
     implementation 'com.android.support:support-v4:26.1.0'
@@ -55,4 +56,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     //GreenDao
     implementation 'org.greenrobot:greendao:3.2.2'
+    implementation files('libs/Lemap.jar')
+    implementation files('libs/hitownsdk.jar')
+
 }

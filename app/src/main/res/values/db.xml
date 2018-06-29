@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="createTableSql">
+    <item>Create  TABLE MAIN.[BaseBarCode]([BarCode] nvarchar(50) NOT NULL COLLATE NOCASE
+,[GoodsName] nvarchar(50) NOT NULL COLLATE NOCASE
+,[ColorCode] nvarchar(50) NOT NULL COLLATE NOCASE
+,[ColorName] nvarchar(50) NOT NULL COLLATE NOCASE
+,[SizeCode] nvarchar(50) NOT NULL COLLATE NOCASE
+,[SizeName] nvarchar(50) NOT NULL COLLATE NOCASE
+,[Category] nvarchar(50) NOT NULL COLLATE NOCASE
+,[SmallCategory] nvarchar(50) NOT NULL COLLATE NOCASE
+,[Long] nvarchar(50) NOT NULL COLLATE NOCASE
+,[Brand] nvarchar(50) NOT NULL COLLATE NOCASE
+,[StandardPrice] decimal DEFAULT 0
+,[UpdateTimestamp] bigint DEFAULT 0
+,[CreateTime] datetime NOT NULL DEFAULT (DATETIME(\'now\', \'localtime\'))
+,[EditTime] datetime NOT NULL DEFAULT (DATETIME(\'now\', \'localtime\')))
+		</item>
+        <item>CREATE Unique INDEX MAIN.[lemapindex_BaseBarCodes_Code] On [BaseBarCode] ([BarCode])</item>
+    </string-array>
+
+    <string-array name="upgradeTableSql">
+
+    </string-array>
+
+    <item name="appName" type="string">myapp</item>
+    <item name="dbVersion" type="integer">1</item>
+</resources>

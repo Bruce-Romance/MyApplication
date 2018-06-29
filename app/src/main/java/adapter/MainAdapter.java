@@ -35,7 +35,7 @@ public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> {
     @Override
     protected void convert(BaseViewHolder helper, MainBean item) {
         helper.setText(R.id.title, item.getTitle());
-        helper.setText(R.id.message, item.getTitle());
+        helper.setText(R.id.message, item.getMessage());
         int position = helper.getAdapterPosition();
         if (position == getCurrentPosition()) {
             helper.setBackgroundColor(R.id.layout, Color.GRAY);
