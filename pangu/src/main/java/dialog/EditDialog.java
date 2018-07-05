@@ -1,7 +1,9 @@
 package dialog;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +20,14 @@ public class EditDialog extends PanGuDialog {
     EditDialog(@NonNull Context context) {
         super(context);
         initView();
+    }
+
+    EditDialog(@NonNull Context context, int themeResId) {
+        super(context, themeResId);
+    }
+
+    EditDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+        super(context, cancelable, cancelListener);
     }
 
     private void initView() {

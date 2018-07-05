@@ -6,6 +6,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import tao.pangu.R;
+
 /**
  * @author YT
  * @date 2018/2/5
@@ -25,7 +27,7 @@ public class DialogUtils {
      */
     public void editDialog(Activity activity, String title, final onEditDialogClick click) {
         if (editDialog == null) {
-            editDialog = new EditDialog(activity);
+            editDialog = new EditDialog(activity,R.style.Theme_AppCompat_Light_Dialog_Alert);
         }
         editDialog.setTitle(title);
         final EditText editText = editDialog.getEditText();
@@ -77,7 +79,7 @@ public class DialogUtils {
      */
     public void messageDialog(Activity activity, String title, String message, boolean hasCancel, final onMessageDialogClick click) {
         if (messageDialog == null) {
-            messageDialog = new MessageDialog(activity);
+            messageDialog = new MessageDialog(activity, R.style.Theme_AppCompat_Light_Dialog_Alert);
         }
         messageDialog.getTvTitle().setText(title);
         messageDialog.getTvMessage().setText(message);
@@ -103,7 +105,7 @@ public class DialogUtils {
     }
 
     public static void chooseDialog(Activity activity, String[] items, String title, String message, final onChooseDialogClick click) {
-        final ChooseDialog dialog = new ChooseDialog(activity);
+        final ChooseDialog dialog = new ChooseDialog(activity,R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.getTvTitle().setText(title);
         dialog.getTvMessage().setText(message);
         for (int i = 0; i < items.length; i++) {

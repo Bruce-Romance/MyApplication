@@ -9,8 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
-import java.util.concurrent.ThreadPoolExecutor;
-
 import Bean.SongCi;
 import Bean.SongCiDao;
 import dialog.DialogUtils;
@@ -51,14 +49,17 @@ public class SongCiActivity extends AppCompatActivity {
         //查出最后一条数据
         Long count = Dao.getInstance().getDaoSession().getSongCiDao().queryBuilder().count();
         SongCi songCi = Dao.getInstance().getDaoSession().getSongCiDao().load(count - 1);
-        title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
-        author.setText(songCi.getAuthor());
-        String[] contents = songCi.getContent().split("。");
-        StringBuilder builder = new StringBuilder();
-        for (String content1 : contents) {
-            builder.append(content1).append("\n").append("\n");
+        if (songCi!=null){
+            title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
+            author.setText(songCi.getAuthor());
+            String[] contents = songCi.getContent().split("。");
+            StringBuilder builder = new StringBuilder();
+            for (String content1 : contents) {
+                builder.append(content1).append("\n").append("\n");
+            }
+            content.setText(builder.toString());
         }
-        content.setText(builder.toString());
+
 
         //查询
         findViewById(R.id.btn_check).setOnClickListener(new View.OnClickListener() {

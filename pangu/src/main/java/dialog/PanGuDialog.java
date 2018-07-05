@@ -32,6 +32,7 @@ class PanGuDialog extends Dialog {
         window.setAttributes(mLayoutParams);
         if (mLayoutParams != null) {
             mLayoutParams.height = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+            mLayoutParams.width = android.view.ViewGroup.LayoutParams.MATCH_PARENT;
             mLayoutParams.gravity = Gravity.CENTER;
         }
     }
