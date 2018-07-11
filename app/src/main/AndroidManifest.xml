@@ -60,7 +60,8 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".SongCiActivity"></activity>
+        <activity android:name=".SongCiActivity" />
+        <activity android:name=".UiCalcActivity"></activity>
     </application>
 
 </manifest>

@@ -18,6 +18,7 @@ import yomix.yt.com.myapplication.ReverseActivity;
 import yomix.yt.com.myapplication.RfidActivity;
 import yomix.yt.com.myapplication.RxActivity;
 import yomix.yt.com.myapplication.SongCiActivity;
+import yomix.yt.com.myapplication.UiCalcActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -98,6 +99,13 @@ public class ZedFragment extends BaseFragment {
                 public void onClick(View v) {
                     //宋词
                     IntentUtils.skipIntent(getActivity(), SongCiActivity.class, false);
+                }
+            });
+            view.findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //DPI计算
+                    IntentUtils.skipIntent(getActivity(), UiCalcActivity.class, false);
                 }
             });
         }

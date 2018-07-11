@@ -21,7 +21,7 @@ import util.Dao;
  * @date 2018/2/9
  */
 
-public class MyApplication extends LemapApplication {
+public class MyApplication extends Application {
 
 
     @Override
