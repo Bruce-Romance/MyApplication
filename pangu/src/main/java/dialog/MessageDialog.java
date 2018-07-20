@@ -16,17 +16,17 @@ public class MessageDialog extends PanGuDialog {
     private TextView mTvMessage;
     private View textView10;
 
-    MessageDialog(@NonNull Context context) {
+    public MessageDialog(@NonNull Context context) {
         super(context);
         initView();
     }
 
-    MessageDialog(@NonNull Context context, int themeResId) {
+    public MessageDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
         initView();
     }
 
-    MessageDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    public MessageDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         initView();
     }

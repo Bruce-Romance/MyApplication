@@ -17,16 +17,16 @@ public class EditDialog extends PanGuDialog {
     private EditText editText;
     private TextView mTvTitle;
 
-    EditDialog(@NonNull Context context) {
+    public EditDialog(@NonNull Context context) {
         super(context);
         initView();
     }
 
-    EditDialog(@NonNull Context context, int themeResId) {
+    public EditDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 
-    EditDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
+    public EditDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
     }
 

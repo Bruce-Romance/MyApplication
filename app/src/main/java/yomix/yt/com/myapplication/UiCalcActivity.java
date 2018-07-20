@@ -6,10 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import java.math.BigDecimal;
 import java.text.DecimalFormat;
-
 import toast.ToastUtils;
 
 
@@ -44,8 +41,7 @@ public class UiCalcActivity extends AppCompatActivity {
                     dpi.setText(calcDpi(width.getText().toString(), height.getText().toString(), size.getText().toString()));
                     ToastUtils.success("再次点击可直接计算DP");
                 } else {
-                    //计算DPi
-                    double DPI = Double.parseDouble(calcDpi(width.getText().toString(), height.getText().toString(), size.getText().toString()));
+                    double DPI = Double.valueOf(dpi.getText().toString());
                     //宽度DP
                     double widthDp = calcWidthDp(width.getText().toString(), DPI);
                     //高度DP

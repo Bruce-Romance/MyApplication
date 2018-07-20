@@ -34,13 +34,6 @@ public class RxActivity extends AppCompatActivity {
 
         selection = RfidConvert.RfidConvertToPer(maxValue, minValue);
 
-        Log.d("数组对象-数组转String", Arrays.toString(selection));
-        String str = Arrays.toString(selection);
-        String[] strs = str.split(",");
-        for (String str1 : strs) {
-            Log.d("数组对象-String转数组", str1);
-        }
-
         ListView listView = findViewById(R.id.listView);
 
         listView.setAdapter(new MyAdapter());

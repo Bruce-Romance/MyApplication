@@ -90,7 +90,7 @@ public class ZedFragment extends BaseFragment {
             view.findViewById(R.id.btn_idCard).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //身份证查询
+                    //数据库测试
                     IntentUtils.skipIntent(getActivity(), IdCardActivity.class, false);
                 }
             });
