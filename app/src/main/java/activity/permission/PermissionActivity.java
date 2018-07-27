@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.permission;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import dialog.onMessageDialogClick;
 import permission.PermissionsUtils;
 import toast.ToastUtils;
 import permission.FileProvider7;
+import yomix.yt.com.myapplication.R;
 
 public class PermissionActivity extends AppCompatActivity {
 

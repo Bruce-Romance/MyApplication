@@ -5,7 +5,7 @@
     android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RfidActivity">
+    tools:context="activity.rfidState.RfidActivity">
 
 
     <TextView

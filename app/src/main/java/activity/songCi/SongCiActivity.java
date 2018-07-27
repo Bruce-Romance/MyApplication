@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.songCi;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +19,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import util.Dao;
+import yomix.yt.com.myapplication.R;
 
 public class SongCiActivity extends AppCompatActivity {
 

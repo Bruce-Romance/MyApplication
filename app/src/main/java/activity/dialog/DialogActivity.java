@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.dialog;
 
 import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import dialog.MessageDialog;
 import toast.ToastUtils;
 import dialog.onEditDialogClick;
 import dialog.onMessageDialogClick;
+import yomix.yt.com.myapplication.R;
 
 public class DialogActivity extends AppCompatActivity {
 

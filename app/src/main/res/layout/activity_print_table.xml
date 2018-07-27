@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="yomix.yt.com.myapplication.PrintTableActivity">
+    tools:context="yomix.yt.com.myapplication.activity.printTable.PrintTableActivity">
 
     <TextView
         android:id="@+id/tv"

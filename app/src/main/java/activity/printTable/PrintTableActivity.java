@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.printTable;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import yomix.yt.com.myapplication.R;
 
 /**
  * @author YT

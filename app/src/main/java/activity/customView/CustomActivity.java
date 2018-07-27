@@ -1,17 +1,17 @@
-package yomix.yt.com.myapplication;
+package activity.customView;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 
-import intent.IntentUtils;
+import yomix.yt.com.myapplication.R;
 
-public class LaunchActivity extends Activity {
+public class CustomActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
-        IntentUtils.skipIntent(LaunchActivity.this, MainActivity.class, true);
+
     }
 }

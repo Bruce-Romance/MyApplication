@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.main;
 
 
 import android.support.annotation.NonNull;
@@ -13,6 +13,7 @@ import fragment.LeesinFragment;
 import fragment.YasuoFragment;
 import fragment.ZedFragment;
 import util.BottomNavigationViewHelper;
+import yomix.yt.com.myapplication.R;
 
 /**
  * @author YT

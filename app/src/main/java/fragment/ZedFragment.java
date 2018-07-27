@@ -8,17 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import intent.IntentUtils;
-import yomix.yt.com.myapplication.DialogActivity;
-import yomix.yt.com.myapplication.IdCardActivity;
-import yomix.yt.com.myapplication.PermissionActivity;
-import yomix.yt.com.myapplication.PrintTableActivity;
+import activity.customView.CustomActivity;
+import activity.dialog.DialogActivity;
+import activity.dataBaseTest.DataBaseTestActivity;
+import activity.permission.PermissionActivity;
+import activity.printTable.PrintTableActivity;
 import yomix.yt.com.myapplication.R;
-import yomix.yt.com.myapplication.RecyclerActivity;
-import yomix.yt.com.myapplication.ReverseActivity;
-import yomix.yt.com.myapplication.RfidActivity;
-import yomix.yt.com.myapplication.RxActivity;
-import yomix.yt.com.myapplication.SongCiActivity;
-import yomix.yt.com.myapplication.UiCalcActivity;
+import activity.recycler.RecyclerActivity;
+import activity.reverse.ReverseActivity;
+import activity.rfidState.RfidActivity;
+import activity.rfidPower.RxActivity;
+import activity.songCi.SongCiActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,7 +91,7 @@ public class ZedFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     //数据库测试
-                    IntentUtils.skipIntent(getActivity(), IdCardActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), DataBaseTestActivity.class, false);
                 }
             });
             view.findViewById(R.id.btn_songci).setOnClickListener(new View.OnClickListener() {
@@ -101,11 +101,11 @@ public class ZedFragment extends BaseFragment {
                     IntentUtils.skipIntent(getActivity(), SongCiActivity.class, false);
                 }
             });
-            view.findViewById(R.id.button9).setOnClickListener(new View.OnClickListener() {
+            view.findViewById(R.id.button10).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //DPI计算
-                    IntentUtils.skipIntent(getActivity(), UiCalcActivity.class, false);
+                    //自定义View
+                    IntentUtils.skipIntent(getActivity(), CustomActivity.class, false);
                 }
             });
         }

@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.dataBaseTest;
 
 
 import android.database.Cursor;
@@ -19,9 +19,10 @@ import Bean.BaseBarCode;
 import adapter.AutoAdapter;
 import business.BarCodeBusiness;
 import toast.ToastUtils;
+import yomix.yt.com.myapplication.R;
 
 
-public class IdCardActivity extends BaseActivity implements Scannable {
+public class DataBaseTestActivity extends BaseActivity implements Scannable {
 
     private BarCodeBusiness business;
 
@@ -36,7 +37,7 @@ public class IdCardActivity extends BaseActivity implements Scannable {
         AutoCompleteTextView edit = findViewById(R.id.editText3);
         info = findViewById(R.id.textView4);
         business = new BarCodeBusiness();
-        adapter = new AutoAdapter(IdCardActivity.this, business);
+        adapter = new AutoAdapter(DataBaseTestActivity.this, business);
         edit.setAdapter(adapter);
 
         edit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -88,7 +89,7 @@ public class IdCardActivity extends BaseActivity implements Scannable {
         this.startAsynMessage(new ProgressMessageFunc() {
             @Override
             public void doException(Exception e) {
-                MessageDialog.show(IdCardActivity.this, "下载失败。" + e.getMessage());
+                MessageDialog.show(DataBaseTestActivity.this, "下载失败。" + e.getMessage());
             }
 
             @Override

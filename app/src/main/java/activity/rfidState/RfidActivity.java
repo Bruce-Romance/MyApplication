@@ -1,11 +1,12 @@
-package yomix.yt.com.myapplication;
+package activity.rfidState;
 
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import activity.BaseActivity;
+import yomix.yt.com.myapplication.R;
 
 public class RfidActivity extends BaseActivity {
     TextView textView;

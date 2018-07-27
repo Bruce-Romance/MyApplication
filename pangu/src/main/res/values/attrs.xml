@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="NumberPickView">
+        <!--数字最大值-->
+        <attr name="maxNum" format="integer"/>
+        <!--数字颜色-->
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
+
+</resources>

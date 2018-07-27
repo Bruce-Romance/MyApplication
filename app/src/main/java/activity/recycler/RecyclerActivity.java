@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.recycler;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import java.util.List;
 import Bean.MainBean;
 import adapter.MainAdapter;
 import recyclerView.RecyclerUtils;
+import yomix.yt.com.myapplication.R;
 
 /**
  * @author YT

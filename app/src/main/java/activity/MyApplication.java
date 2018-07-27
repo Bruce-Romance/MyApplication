@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity;
 
 import android.app.Application;
 import android.database.sqlite.SQLiteDatabase;

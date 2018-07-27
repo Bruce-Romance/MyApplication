@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity.reverse;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import yomix.yt.com.myapplication.R;
 
 public class ReverseActivity extends AppCompatActivity {
     TextView tv_result;

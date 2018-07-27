@@ -1,4 +1,4 @@
-package yomix.yt.com.myapplication;
+package activity;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
