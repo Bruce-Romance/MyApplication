@@ -23,47 +23,7 @@ public class SongCiActivity extends AppCompatActivity implements SongCiContract.
 
     private LoadDialog loadDialog;
 
-    private SongCiContract.Presenter mPresenter = new SongCiPresenter(new SongCiContract.View() {
-        @Override
-        public void success(final SongCi songCi) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
-                    author.setText(songCi.getAuthor());
-                    String[] contents = songCi.getContent().split("。");
-                    StringBuilder builder = new StringBuilder();
-                    for (String content1 : contents) {
-                        builder.append(content1).append("\n").append("\n");
-                    }
-                    content.setText(builder.toString());
-//                    loadDialog.getLottieView().loop(false);
-//                    loadDialog.dismiss();
-                }
-            });
-        }
-
-        @Override
-        public void fail(final String errorMsg) {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-//                    loadDialog.dismiss();
-                    new DialogUtils().messageDialog(SongCiActivity.this, "查询失败", errorMsg, false, new onMessageDialogClick() {
-                        @Override
-                        public void confirm(MessageDialog dialog) {
-
-                        }
-
-                        @Override
-                        public void cancel(MessageDialog dialog) {
-
-                        }
-                    });
-                }
-            });
-        }
-    });
+    private SongCiContract.Presenter mPresenter;
 
     private DialogUtils utils;
 
@@ -76,6 +36,8 @@ public class SongCiActivity extends AppCompatActivity implements SongCiContract.
         content = findViewById(R.id.tv_content);
         editText = findViewById(R.id.edit_content);
         utils = new DialogUtils();
+
+        mPresenter = new SongCiPresenter(this);
 
 
         //查出最后一条数据
@@ -129,8 +91,8 @@ public class SongCiActivity extends AppCompatActivity implements SongCiContract.
                     builder.append(content1).append("\n").append("\n");
                 }
                 content.setText(builder.toString());
-                loadDialog.getLottieView().loop(false);
-                loadDialog.dismiss();
+//                loadDialog.getLottieView().loop(false);
+//                loadDialog.dismiss();
             }
         });
     }
@@ -140,7 +102,7 @@ public class SongCiActivity extends AppCompatActivity implements SongCiContract.
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                loadDialog.dismiss();
+//                loadDialog.dismiss();
                 new DialogUtils().messageDialog(SongCiActivity.this, "查询失败", errorMsg, false, new onMessageDialogClick() {
                     @Override
                     public void confirm(MessageDialog dialog) {
