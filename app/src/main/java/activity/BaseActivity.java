@@ -9,6 +9,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -42,6 +45,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * 是否需要订阅EventBus
+     * @return
+     */
+    protected abstract boolean isSubscribe();
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +74,10 @@ public abstract class BaseActivity extends AppCompatActivity {
                 sendRequest_RefreshEmshStatus();
             }
         };
+
+        if (isSubscribe()){
+            EventBus.getDefault().register(this);
+        }
 
         Timer mTimer = new Timer();
         TimerTask mTimerTask = new TimerTask() {
@@ -103,6 +116,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unregisterReceiver(mEmshStatusReceiver);
+        if (isSubscribe()){
+            EventBus.getDefault().unregister(this);
+        }
     }
 
     protected abstract void rfidStatus(int value);

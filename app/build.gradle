@@ -59,6 +59,6 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation files('libs/Lemap.jar')
     implementation files('libs/hitownsdk.jar')
-    //自适应字体
-    implementation 'com.github.AndroidDeveloperLB:AutoFitTextView:4'
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.1.1'
 }

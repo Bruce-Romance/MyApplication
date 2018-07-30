@@ -4,13 +4,17 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.widget.TextView;
-
 import activity.BaseActivity;
 import yomix.yt.com.myapplication.R;
 
 public class RfidActivity extends BaseActivity {
     TextView textView;
     ConstraintLayout parent;
+
+    @Override
+    protected boolean isSubscribe() {
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

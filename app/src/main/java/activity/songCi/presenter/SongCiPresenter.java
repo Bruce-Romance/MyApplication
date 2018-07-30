@@ -1,5 +1,7 @@
 package activity.songCi.presenter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import Bean.SongCi;
 import activity.songCi.contract.SongCiContract;
 import activity.songCi.model.SongCiModel;
@@ -30,7 +32,8 @@ public class SongCiPresenter implements SongCiContract.Presenter {
      */
     @Override
     public void success(SongCi songCi) {
-        view.success(songCi);
+        EventBus.getDefault().post(songCi);
+//        view.success(songCi);
     }
 
     /**
