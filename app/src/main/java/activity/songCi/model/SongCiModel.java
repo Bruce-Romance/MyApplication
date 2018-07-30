@@ -47,10 +47,6 @@ public class SongCiModel implements SongCiContract.Model {
                     songCi.setType(jsonObject.getString("type"));
                     songCi.setContent(jsonObject.getString("content"));
                     songCi.setAuthor(jsonObject.getString("author"));
-                    SongCi songCi1 = Dao.getInstance().getDaoSession().getSongCiDao().queryBuilder().where(SongCiDao.Properties.Title.eq(songCi.getTitle())).unique();
-                    if (songCi1 == null) {
-                        Dao.getInstance().getDaoSession().insert(songCi);
-                    }
                     mPresenter.success(songCi);
                 }
             } else {
