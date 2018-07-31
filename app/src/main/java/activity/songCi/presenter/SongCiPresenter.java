@@ -3,6 +3,7 @@ package activity.songCi.presenter;
 import org.greenrobot.eventbus.EventBus;
 
 import Bean.SongCi;
+import activity.songCi.ErrorMessage;
 import activity.songCi.contract.SongCiContract;
 import activity.songCi.model.SongCiModel;
 
@@ -32,6 +33,7 @@ public class SongCiPresenter implements SongCiContract.Presenter {
      */
     @Override
     public void success(SongCi songCi) {
+        //使用EventBus可以减少一次View层回调.否则又需要在View层多写一个线程转换方法
         EventBus.getDefault().post(songCi);
 //        view.success(songCi);
     }
@@ -43,7 +45,8 @@ public class SongCiPresenter implements SongCiContract.Presenter {
      */
     @Override
     public void fail(String errorMsg) {
-        view.fail(errorMsg);
+        EventBus.getDefault().post(new ErrorMessage(errorMsg));
+//        view.fail(errorMsg);
     }
 
 }

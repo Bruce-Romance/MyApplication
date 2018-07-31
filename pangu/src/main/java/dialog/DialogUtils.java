@@ -104,6 +104,14 @@ public class DialogUtils {
         messageDialog.show();
     }
 
+    /**
+     * 自定义数量的RadioButton选择框
+     * @param activity
+     * @param items
+     * @param title
+     * @param message
+     * @param click
+     */
     public static void chooseDialog(Activity activity, String[] items, String title, String message, final onChooseDialogClick click) {
         final ChooseDialog dialog = new ChooseDialog(activity,R.style.Theme_AppCompat_Light_Dialog_Alert);
         dialog.getTvTitle().setText(title);

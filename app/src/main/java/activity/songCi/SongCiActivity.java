@@ -137,6 +137,6 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
 
     @Override
     public void fail(final String errorMsg) {
-        EventBus.getDefault().post(new ErrorMessage(errorMsg));
+//        EventBus.getDefault().post(new ErrorMessage(errorMsg));
     }
 }
