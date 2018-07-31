@@ -12,17 +12,16 @@ import com.lemap.app.MessageDialog;
 import com.lemap.data.Completed;
 import com.lemap.data.ProgressMessage;
 import com.lemap.data.ProgressMessageFunc;
-import com.lemap.data.ScanType;
-import com.lemap.scanner.Scannable;
 
-import Bean.BaseBarCode;
+import bean.BaseBarCode;
+import activity.dataBaseTest.contract.DataBaseContract;
 import adapter.AutoAdapter;
 import business.BarCodeBusiness;
 import toast.ToastUtils;
 import yomix.yt.com.myapplication.R;
 
 
-public class DataBaseTestActivity extends BaseActivity implements Scannable {
+public class DataBaseTestActivity extends BaseActivity implements DataBaseContract.View {
 
     private BarCodeBusiness business;
 
@@ -60,23 +59,6 @@ public class DataBaseTestActivity extends BaseActivity implements Scannable {
 
     @Override
     protected void initComponent() {
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        registerScannable(this);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        unregisterScannable(this);
-    }
-
-    @Override
-    public void onScan(String s, ScanType scanType) {
 
     }
 

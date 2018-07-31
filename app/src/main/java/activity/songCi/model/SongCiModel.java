@@ -4,13 +4,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.IOException;
-import Bean.SongCi;
-import Bean.SongCiDao;
+import bean.SongCi;
 import activity.songCi.contract.SongCiContract;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import util.Dao;
 
 public class SongCiModel implements SongCiContract.Model {
 

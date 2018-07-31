@@ -2,7 +2,7 @@ package activity.recycler.presenter;
 
 import java.util.List;
 
-import Bean.MainBean;
+import bean.MainBean;
 import activity.recycler.contract.RecyclerContract;
 import activity.recycler.model.RecyclerModel;
 

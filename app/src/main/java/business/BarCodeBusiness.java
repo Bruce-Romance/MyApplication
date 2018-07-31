@@ -24,8 +24,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-import Bean.BaseBarCode;
-import Bean.BaseDownload;
+import bean.BaseBarCode;
+import bean.BaseDownload;
 import data.AppConfig;
 import util.ClsUtils;
 import util.FileHelper;

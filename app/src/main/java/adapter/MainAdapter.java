@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import java.util.List;
-import Bean.MainBean;
+import bean.MainBean;
 import yomix.yt.com.myapplication.R;
 
 /**

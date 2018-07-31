@@ -2,8 +2,8 @@ package util;
 
 import android.content.Context;
 import org.greenrobot.greendao.database.Database;
-import Bean.DaoMaster;
-import Bean.DaoSession;
+import bean.DaoMaster;
+import bean.DaoSession;
 
 public class Dao {
     private DaoSession daoSession;

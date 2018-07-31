@@ -3,7 +3,7 @@ package activity.recycler.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import Bean.MainBean;
+import bean.MainBean;
 import activity.recycler.contract.RecyclerContract;
 import activity.recycler.presenter.RecyclerPresenter;
 

@@ -2,7 +2,7 @@ package activity.recycler.contract;
 
 import java.util.List;
 
-import Bean.MainBean;
+import bean.MainBean;
 
 public interface RecyclerContract {
 

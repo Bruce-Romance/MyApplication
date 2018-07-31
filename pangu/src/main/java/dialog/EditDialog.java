@@ -24,10 +24,12 @@ public class EditDialog extends PanGuDialog {
 
     public EditDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
+        initView();
     }
 
     public EditDialog(@NonNull Context context, boolean cancelable, @Nullable OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
+        initView();
     }
 
     private void initView() {

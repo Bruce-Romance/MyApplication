@@ -1,7 +1,6 @@
-package Bean;
+package bean;
 
 import com.lemap.dataaccess.Column;
-import com.lemap.dataaccess.MKey;
 import com.lemap.synchrodata.bean.SyncableBean;
 import java.util.Date;
 

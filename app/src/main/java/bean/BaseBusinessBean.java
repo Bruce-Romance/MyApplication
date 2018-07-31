@@ -3,7 +3,7 @@
  * @author 廖安良
  * @version 创建时间：2013-1-16 上午11:27:57
  */
-package Bean;
+package bean;
 
 import com.lemap.core.AppParamContext;
 import com.lemap.core.LemapContext;

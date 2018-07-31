@@ -9,7 +9,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import Bean.SongCi;
+import eventbus.Event;
+import eventbus.EventBusCode;
+import bean.SongCi;
 import activity.BaseActivity;
 import activity.songCi.contract.SongCiContract;
 import activity.songCi.presenter.SongCiPresenter;
@@ -17,7 +19,6 @@ import dialog.DialogUtils;
 import dialog.LoadDialog;
 import dialog.MessageDialog;
 import dialog.onMessageDialogClick;
-import util.Dao;
 import yomix.yt.com.myapplication.R;
 
 public class SongCiActivity extends BaseActivity implements SongCiContract.View {
@@ -61,7 +62,7 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
             public void onClick(View v) {
                 loadDialog = utils.loadDialog(SongCiActivity.this, R.style.PanGuDialog);
                 //发送事件
-                EventBus.getDefault().post(editText.getText().toString());
+                EventBus.getDefault().post(new Event<>(EventBusCode.SongCiStart, editText.getText().toString()));
             }
         });
     }
@@ -75,11 +76,12 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
      * 订阅消息
      * 根据对象区分事件
      *
-     * @param content
+     * @param event
      */
     @Subscribe(threadMode = ThreadMode.ASYNC)
-    public void query(String content) {
-        mPresenter.requestSongCi(content);
+    public void query(Event event) {
+        if (event.getCode() == EventBusCode.SongCiStart)
+            mPresenter.requestSongCi((String) event.getData());
     }
 
     @Override
@@ -94,24 +96,28 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
     /**
      * View层发送事件,切换到主线程处理
      *
-     * @param songCi
+     * @param event
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void subscribeSuccess(final SongCi songCi) {
-        title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
-        author.setText(songCi.getAuthor());
-        String[] contents = songCi.getContent().split("。");
-        StringBuilder builder = new StringBuilder();
-        for (String content1 : contents) {
-            builder.append(content1).append("\n").append("\n");
+    public void subscribeSuccess(Event event) {
+        if (event.getCode() == EventBusCode.SongCiSuccess) {
+            SongCi songCi = (SongCi) event.getData();
+            title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
+            author.setText(songCi.getAuthor());
+            String[] contents = songCi.getContent().split("。");
+            StringBuilder builder = new StringBuilder();
+            for (String content1 : contents) {
+                builder.append(content1).append("\n").append("\n");
+            }
+            content.setText(builder.toString());
+            loadDialog.getLottieView().loop(false);
+            loadDialog.dismiss();
         }
-        content.setText(builder.toString());
-        loadDialog.getLottieView().loop(false);
-        loadDialog.dismiss();
     }
 
     /**
      * View层回调
+     *
      * @param songCi
      */
     @Override
@@ -120,19 +126,21 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
-    public void subscribeFail(ErrorMessage errorMessage) {
-        loadDialog.dismiss();
-        new DialogUtils().messageDialog(SongCiActivity.this, "查询失败", errorMessage.getMsg(), false, new onMessageDialogClick() {
-            @Override
-            public void confirm(MessageDialog dialog) {
+    public void subscribeFail(Event event) {
+        if (event.getCode() == EventBusCode.SongCiFail) {
+            loadDialog.dismiss();
+            new DialogUtils().messageDialog(SongCiActivity.this, "查询失败", (String) event.getData(), false, new onMessageDialogClick() {
+                @Override
+                public void confirm(MessageDialog dialog) {
 
-            }
+                }
 
-            @Override
-            public void cancel(MessageDialog dialog) {
+                @Override
+                public void cancel(MessageDialog dialog) {
 
-            }
-        });
+                }
+            });
+        }
     }
 
     @Override

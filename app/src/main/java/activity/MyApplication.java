@@ -1,17 +1,9 @@
 package activity;
 
 import android.app.Application;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.lemap.app.LemapApplication;
-import com.lemap.app.MessageDialog;
-import com.lemap.core.LemapContext;
 import com.vondear.rxtools.RxTool;
 
-import org.greenrobot.greendao.database.Database;
-
-import Bean.DaoMaster;
 import log.LogUtils;
 import tao.pangu.PanGu;
 import util.Dao;

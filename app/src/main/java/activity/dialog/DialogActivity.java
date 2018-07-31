@@ -1,19 +1,25 @@
 package activity.dialog;
 
 import android.app.Dialog;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import activity.dialog.contract.DialogContract;
+import activity.dialog.presenter.DialogPresenter;
 import dialog.DialogUtils;
+import dialog.LoadDialog;
 import dialog.MessageDialog;
 import toast.ToastUtils;
 import dialog.onEditDialogClick;
 import dialog.onMessageDialogClick;
 import yomix.yt.com.myapplication.R;
 
-public class DialogActivity extends AppCompatActivity {
+public class DialogActivity extends AppCompatActivity implements DialogContract.View {
+
+    private DialogContract.Presenter presenter;
 
     DialogUtils utils;
 
@@ -22,6 +28,8 @@ public class DialogActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dialog);
         utils = new DialogUtils();
+
+        presenter = new DialogPresenter(this);
     }
 
 
@@ -54,6 +62,14 @@ public class DialogActivity extends AppCompatActivity {
     }
 
     public void LoadDialog(View view) {
-//        utils.loadDialog(DialogActivity.this, R.style.PanGuDialog).show();
+        final LoadDialog dialog = utils.loadDialog(DialogActivity.this, R.style.PanGuDialog);
+        dialog.show();
+        Handler handler = new Handler(getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                dialog.dismiss();
+            }
+        }, 4000);
     }
 }

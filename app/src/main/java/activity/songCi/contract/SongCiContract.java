@@ -1,6 +1,6 @@
 package activity.songCi.contract;
 
-import Bean.SongCi;
+import bean.SongCi;
 
 public interface SongCiContract {
 

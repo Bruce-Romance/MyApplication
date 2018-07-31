@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 import com.lemap.dataaccess.Column;
 

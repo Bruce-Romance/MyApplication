@@ -1,4 +1,4 @@
-package Bean;
+package bean;
 
 /**
  * @author YT
