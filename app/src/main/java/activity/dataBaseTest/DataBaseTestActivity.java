@@ -2,41 +2,56 @@ package activity.dataBaseTest;
 
 
 import android.database.Cursor;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import com.lemap.app.BaseActivity;
 import com.lemap.app.MessageDialog;
 import com.lemap.data.Completed;
 import com.lemap.data.ProgressMessage;
 import com.lemap.data.ProgressMessageFunc;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import activity.BaseActivity;
+import activity.dataBaseTest.presenter.DataBasePresenter;
 import bean.BaseBarCode;
 import activity.dataBaseTest.contract.DataBaseContract;
 import adapter.AutoAdapter;
 import business.BarCodeBusiness;
+import dialog.DialogUtils;
+import dialog.LoadDialog;
+import eventbus.Event;
+import eventbus.EventBusCode;
 import toast.ToastUtils;
 import yomix.yt.com.myapplication.R;
 
 
 public class DataBaseTestActivity extends BaseActivity implements DataBaseContract.View {
 
-    private BarCodeBusiness business;
+    private DataBaseContract.Presenter presenter;
 
     private AutoAdapter adapter;
 
     private TextView info;
 
+    private LoadDialog dialog;
+
     @Override
-    protected void onCreate() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_card);
+
+        presenter = new DataBasePresenter(this);
 
         AutoCompleteTextView edit = findViewById(R.id.editText3);
         info = findViewById(R.id.textView4);
-        business = new BarCodeBusiness();
-        adapter = new AutoAdapter(DataBaseTestActivity.this, business);
+        adapter = new AutoAdapter(DataBaseTestActivity.this, new BarCodeBusiness());
         edit.setAdapter(adapter);
 
         edit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -45,7 +60,7 @@ public class DataBaseTestActivity extends BaseActivity implements DataBaseContra
                 StringBuilder sb = new StringBuilder("");
                 Cursor c = (Cursor) adapter.getItem(position);
                 String code = c.getString(0);
-                BaseBarCode baseBarCode = business.queryOne(code);
+                BaseBarCode baseBarCode = new BarCodeBusiness().queryOne(code);
                 if (baseBarCode != null) {
                     sb.append("条码:").append(baseBarCode.Code).append("\n")
                             .append("货品名称:").append(baseBarCode.GoodsName).append("\n")
@@ -57,33 +72,47 @@ public class DataBaseTestActivity extends BaseActivity implements DataBaseContra
         });
     }
 
-    @Override
-    protected void initComponent() {
-
-    }
-
     /**
-     * 测试下载
+     * 开始下载
      *
      * @param view
      */
     public void testDownload(View view) {
-        this.startAsynMessage(new ProgressMessageFunc() {
-            @Override
-            public void doException(Exception e) {
-                MessageDialog.show(DataBaseTestActivity.this, "下载失败。" + e.getMessage());
-            }
+        DialogUtils utils = new DialogUtils();
+        dialog = utils.loadDialog(this, R.style.PanGuDialog);
+        dialog.show();
+        EventBus.getDefault().post(new Event<>(EventBusCode.DataBaseStartDown));
+    }
 
-            @Override
-            public Object run(ProgressMessage progressMessage) throws Exception {
-                business.downLoadFile(progressMessage);
-                return null;
-            }
-        }, new Completed() {
-            @Override
-            public void run(Object o) {
-                ToastUtils.success("下载完成");
-            }
-        });
+    @Subscribe(threadMode = ThreadMode.ASYNC)
+    public void startDownLoad(Event event) {
+        if (event.getCode() == EventBusCode.DataBaseStartDown) {
+            presenter.downLoad();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void downSuccess(Event event) {
+        if (event.getCode() == EventBusCode.DataBaseDownSuccess) {
+            dialog.dismiss();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void downFail(Event event) {
+        if (event.getCode() == EventBusCode.DataBaseDownFail) {
+            ToastUtils.error((String) event.getData());
+            dialog.dismiss();
+        }
+    }
+
+    @Override
+    protected boolean isSubscribe() {
+        return true;
+    }
+
+    @Override
+    protected void rfidStatus(int value) {
+
     }
 }
