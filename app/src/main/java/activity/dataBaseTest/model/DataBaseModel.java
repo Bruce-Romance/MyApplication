@@ -1,6 +1,7 @@
 package activity.dataBaseTest.model;
 
 
+import android.database.Cursor;
 import android.os.Handler;
 
 import com.lemap.core.LemapContext;
@@ -23,8 +24,10 @@ import java.net.URL;
 import java.util.List;
 
 import activity.dataBaseTest.contract.DataBaseContract;
+import adapter.AutoAdapter;
 import bean.BaseBarCode;
 import bean.BaseDownload;
+import business.BarCodeBusiness;
 import data.AppConfig;
 import util.ClsUtils;
 import util.FileHelper;
@@ -138,6 +141,23 @@ public class DataBaseModel extends BaseListSyncManagement<BaseBarCode> implement
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void ItemClick(int position, AutoAdapter adapter) {
+        StringBuilder sb = new StringBuilder("");
+        Cursor c = (Cursor) adapter.getItem(position);
+        String code = c.getString(0);
+        BaseBarCode baseBarCode = new BarCodeBusiness().queryOne(code);
+        if (baseBarCode != null) {
+            sb.append("条码:").append(baseBarCode.Code).append("\n")
+                    .append("货品名称:").append(baseBarCode.GoodsName).append("\n")
+                    .append("颜色:").append(baseBarCode.ColorName).append("\n")
+                    .append("尺码:").append(baseBarCode.SizeName).append("\n");
+            presenter.setItem(sb.toString(), 1);
+        } else {
+            presenter.setItem(null, 2);
         }
     }
 }

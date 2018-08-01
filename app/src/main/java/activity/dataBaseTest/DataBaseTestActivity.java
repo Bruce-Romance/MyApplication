@@ -1,7 +1,6 @@
 package activity.dataBaseTest;
 
 
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
@@ -9,18 +8,12 @@ import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
-import com.lemap.app.MessageDialog;
-import com.lemap.data.Completed;
-import com.lemap.data.ProgressMessage;
-import com.lemap.data.ProgressMessageFunc;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import activity.BaseActivity;
 import activity.dataBaseTest.presenter.DataBasePresenter;
-import bean.BaseBarCode;
 import activity.dataBaseTest.contract.DataBaseContract;
 import adapter.AutoAdapter;
 import business.BarCodeBusiness;
@@ -57,17 +50,7 @@ public class DataBaseTestActivity extends BaseActivity implements DataBaseContra
         edit.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                StringBuilder sb = new StringBuilder("");
-                Cursor c = (Cursor) adapter.getItem(position);
-                String code = c.getString(0);
-                BaseBarCode baseBarCode = new BarCodeBusiness().queryOne(code);
-                if (baseBarCode != null) {
-                    sb.append("条码:").append(baseBarCode.Code).append("\n")
-                            .append("货品名称:").append(baseBarCode.GoodsName).append("\n")
-                            .append("颜色:").append(baseBarCode.ColorName).append("\n")
-                            .append("尺码:").append(baseBarCode.SizeName).append("\n");
-                    info.setText(sb);
-                }
+                presenter.ItemClick(position, adapter);
             }
         });
     }
@@ -113,6 +96,19 @@ public class DataBaseTestActivity extends BaseActivity implements DataBaseContra
 
     @Override
     protected void rfidStatus(int value) {
+
+    }
+
+    @Override
+    public void setItem(String str, int code) {
+        switch (code) {
+            case 1:
+                info.setText(str);
+                break;
+            case 2:
+                ToastUtils.error("条码不存在");
+                break;
+        }
 
     }
 }

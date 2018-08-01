@@ -2,8 +2,6 @@ package activity.customView;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-
 import yomix.yt.com.myapplication.R;
 
 public class CustomActivity extends Activity {

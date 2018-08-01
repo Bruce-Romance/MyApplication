@@ -52,8 +52,10 @@ public class SongCiModel implements SongCiContract.Model {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            mPresenter.fail(e.getMessage());
         } catch (JSONException e) {
             e.printStackTrace();
+            mPresenter.fail(e.getMessage());
         }
     }
 }
