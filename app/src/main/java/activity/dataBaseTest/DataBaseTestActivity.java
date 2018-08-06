@@ -7,11 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
-
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
-
 import activity.BaseActivity;
 import activity.dataBaseTest.presenter.DataBasePresenter;
 import activity.dataBaseTest.contract.DataBaseContract;
