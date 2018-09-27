@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
  */
 
 public class RecyclerUtils {
+
     private static RecyclerView.LayoutManager mLayoutManager;
 
     /**

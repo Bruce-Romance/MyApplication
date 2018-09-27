@@ -14,30 +14,16 @@ public class IntentUtils {
     private static Intent intent = new Intent();
 
     /**
-     * 普通跳转
+     * 不带参数跳转
      *
-     * @param activity
-     * @param cls
+     * @param activity     上下文
+     * @param cls          跳转到哪里
+     * @param isFinishSelf 是否结束当前Activity
+     * @param requestCode  请求Code
      */
-    public static void skipIntent(Activity activity, Class<?> cls, boolean isFinishSelf) {
+    public static void skipIntent(Activity activity, Class<?> cls, boolean isFinishSelf, int requestCode) {
         intent.setClass(activity, cls);
-        activity.startActivity(intent);
-        if (isFinishSelf) {
-            activity.finish();
-        }
-    }
-
-    /**
-     * 普通跳转(ForResult)
-     *
-     * @param activity
-     * @param cls
-     * @param isFinishSelf
-     * @param RequestCode
-     */
-    public static void skipIntentForResult(Activity activity, Class<?> cls, boolean isFinishSelf, int RequestCode) {
-        intent.setClass(activity, cls);
-        activity.startActivityForResult(intent, RequestCode);
+        activity.startActivityForResult(intent, requestCode);
         if (isFinishSelf) {
             activity.finish();
         }
@@ -46,32 +32,16 @@ public class IntentUtils {
     /**
      * 带参数跳转
      *
-     * @param activity
-     * @param cls
-     * @param bundle
+     * @param activity     上下文
+     * @param cls          跳转到哪里
+     * @param isFinishSelf 是否结束当前Activity
+     * @param bundle       传递对象
+     * @param requestCode  请求Code
      */
-    public static void skipDataIntent(Activity activity, Class<?> cls, boolean isFinishSelf, Bundle bundle) {
+    public static void skipDataIntent(Activity activity, Class<?> cls, boolean isFinishSelf, Bundle bundle, int requestCode) {
         intent.setClass(activity, cls);
         intent.putExtras(bundle);
-        activity.startActivity(intent);
-        if (isFinishSelf) {
-            activity.finish();
-        }
-    }
-
-    /**
-     * 带参数跳转(ForResult)
-     *
-     * @param activity
-     * @param cls
-     * @param isFinishSelf
-     * @param bundle
-     * @param RequestCode
-     */
-    public static void skipDataIntentForResult(Activity activity, Class<?> cls, boolean isFinishSelf, Bundle bundle, int RequestCode) {
-        intent.setClass(activity, cls);
-        intent.putExtras(bundle);
-        activity.startActivityForResult(intent, RequestCode);
+        activity.startActivityForResult(intent, requestCode);
         if (isFinishSelf) {
             activity.finish();
         }

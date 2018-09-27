@@ -6,13 +6,13 @@
     android:background="@drawable/shape_load_bg"
     android:orientation="vertical">
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center_horizontal"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="load.json" />
+    <!--<com.airbnb.lottie.LottieAnimationView-->
+        <!--android:id="@+id/lottieView"-->
+        <!--android:layout_width="120dp"-->
+        <!--android:layout_height="120dp"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--app:lottie_autoPlay="true"-->
+        <!--app:lottie_fileName="load.json" />-->
 
     <!--<TextView-->
         <!--android:id="@+id/tv_content"-->

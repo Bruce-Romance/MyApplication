@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-
 import tao.pangu.R;
 
 /**
@@ -31,6 +30,7 @@ public class DialogUtils {
         }
         editDialog.setTitle(title);
         final EditText editText = editDialog.getEditText();
+        editText.setText("");
         editDialog.getTvSure().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,8 +60,8 @@ public class DialogUtils {
             loadDialog = new LoadDialog(activity, themeResId);
         }
 //        loadDialog.setContent(content);
-        loadDialog.getLottieView().playAnimation();
-        loadDialog.getLottieView().loop(true);
+//        loadDialog.getLottieView().playAnimation();
+//        loadDialog.getLottieView().loop(true);
         loadDialog.setCanceledOnTouchOutside(false);
         loadDialog.setCancelable(false);
         loadDialog.show();

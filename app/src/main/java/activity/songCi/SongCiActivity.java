@@ -110,7 +110,7 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
                 builder.append(content1).append("\n").append("\n");
             }
             content.setText(builder.toString());
-            loadDialog.getLottieView().loop(false);
+//            loadDialog.getLottieView().loop(false);
             loadDialog.dismiss();
         }
     }

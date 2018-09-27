@@ -14,10 +14,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
 import dialog.DialogUtils;
 import dialog.MessageDialog;
 import dialog.onMessageDialogClick;
@@ -77,12 +79,10 @@ public class PermissionActivity extends AppCompatActivity {
     private void takePhoto() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-
             String filename = new SimpleDateFormat("yyyyMMdd-HHmmss", Locale.CHINA).format(new Date()) + ".png";
             File file = new File(Environment.getExternalStorageDirectory(), filename);
             mCurrentPhotoPath = file.getAbsolutePath();
-//            Uri fileUri = FileProvider.getUriForFile(this, "com.myapplication.fileprovider", file);
-            Uri fileUri = FileProvider7.getUriForFile(this,file);
+            Uri fileUri = FileProvider7.getUriForFile(this, file);
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
             startActivityForResult(takePictureIntent, REQUEST_CODE_TAKE_PHOTO);
         }
@@ -122,7 +122,7 @@ public class PermissionActivity extends AppCompatActivity {
                 }
             } else {
                 ToastUtils.success("允许权限");
-                if (i == grantResults.length-1) {
+                if (i == grantResults.length - 1) {
                     takePhoto();
                 }
             }

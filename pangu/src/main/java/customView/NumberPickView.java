@@ -10,6 +10,7 @@ import android.view.View;
 
 
 public class NumberPickView extends View {
+
     Paint paint = new Paint();
 
     int offsetX, offsetY, X, Y;

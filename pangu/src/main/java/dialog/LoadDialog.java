@@ -6,11 +6,13 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+//import com.airbnb.lottie.LottieAnimationView;
 import com.airbnb.lottie.LottieAnimationView;
+
 import tao.pangu.R;
 
 public class LoadDialog extends PanGuDialog {
-    private LottieAnimationView lottieView;
+//    private LottieAnimationView lottieView;
     private TextView tvContent;
 
     public LoadDialog(@NonNull Context context) {
@@ -30,14 +32,14 @@ public class LoadDialog extends PanGuDialog {
 
     private void initView(Context context) {
         View dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_load, null);
-        lottieView = dialogView.findViewById(R.id.lottieView);
+//        lottieView = dialogView.findViewById(R.id.lottieView);
 //        tvContent = dialogView.findViewById(R.id.tv_content);
         setContentView(dialogView);
     }
 
-    public LottieAnimationView getLottieView() {
-        return lottieView;
-    }
+//    public LottieAnimationView getLottieView() {
+//        return lottieView;
+////    }
 
     public TextView getTvContent() {
         return tvContent;

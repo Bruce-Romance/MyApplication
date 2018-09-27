@@ -42,70 +42,70 @@ public class ZedFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     //打印
-                    IntentUtils.skipIntent(getActivity(), PrintTableActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), PrintTableActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_rv).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Rv
-                    IntentUtils.skipIntent(getActivity(), RecyclerActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), RecyclerActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_broadcast).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Rfid状态广播
-                    IntentUtils.skipIntent(getActivity(), RfidActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), RfidActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_percent).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Rfid功率百分比
-                    IntentUtils.skipIntent(getActivity(), RxActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), RxActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_dialog).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //dialog展示
-                    IntentUtils.skipIntent(getActivity(), DialogActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), DialogActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_permission).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //权限申请
-                    IntentUtils.skipIntent(getActivity(), PermissionActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), PermissionActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_change_str).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //逆转字符串
-                    IntentUtils.skipIntent(getActivity(), ReverseActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), ReverseActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_idCard).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //数据库测试
-                    IntentUtils.skipIntent(getActivity(), DataBaseTestActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), DataBaseTestActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.btn_songci).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //宋词
-                    IntentUtils.skipIntent(getActivity(), SongCiActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), SongCiActivity.class, false,0);
                 }
             });
             view.findViewById(R.id.button10).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //自定义View
-                    IntentUtils.skipIntent(getActivity(), CustomActivity.class, false);
+                    IntentUtils.skipIntent(getActivity(), CustomActivity.class, false,0);
                 }
             });
         }
