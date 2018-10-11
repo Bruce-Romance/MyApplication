@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ActManager {
 
-    public static ActManager mActManager;
+    private static ActManager mActManager;
     /**
      * 存放Activity的map
      */
