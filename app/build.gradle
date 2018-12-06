@@ -48,8 +48,8 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.10.0'
     //GreenDao
     implementation 'org.greenrobot:greendao:3.2.2'
-    implementation files('libs/Lemap.jar')
-    implementation files('libs/hitownsdk.jar')
     //EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+    implementation files('libs/umeng-analytics-7.5.4.jar')
+    implementation files('libs/umeng-common-1.5.4.jar')
 }

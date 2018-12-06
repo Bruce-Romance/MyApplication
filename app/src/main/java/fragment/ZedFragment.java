@@ -7,10 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.umeng.analytics.MobclickAgent;
+
 import intent.IntentUtils;
 import activity.customView.CustomActivity;
 import activity.dialog.DialogActivity;
-import activity.dataBaseTest.DataBaseTestActivity;
 import activity.permission.PermissionActivity;
 import activity.printTable.PrintTableActivity;
 import yomix.yt.com.myapplication.R;
@@ -31,6 +32,18 @@ public class ZedFragment extends BaseFragment {
 
     public static ZedFragment newInstance() {
         return ZED_FRAGMENT;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("ZedFragment");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ZedFragment");
     }
 
     @Override
@@ -90,8 +103,7 @@ public class ZedFragment extends BaseFragment {
             view.findViewById(R.id.btn_idCard).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //数据库测试
-                    IntentUtils.skipIntent(getActivity(), DataBaseTestActivity.class, false,0);
+
                 }
             });
             view.findViewById(R.id.btn_songci).setOnClickListener(new View.OnClickListener() {

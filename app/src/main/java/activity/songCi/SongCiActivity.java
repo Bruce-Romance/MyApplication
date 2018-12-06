@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -32,6 +34,7 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
     private SongCiContract.Presenter mPresenter;
 
     private DialogUtils utils;
+
 
     /**
      * 是否需要订阅Event事件
@@ -87,9 +90,18 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
     @Override
     protected void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd("SongCiActivity");
+        MobclickAgent.onPause(this);
         if (loadDialog != null) {
             loadDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("SongCiActivity");
+        MobclickAgent.onResume(this);
     }
 
 

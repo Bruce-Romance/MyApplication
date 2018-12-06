@@ -4,6 +4,9 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.widget.TextView;
+
+import com.umeng.analytics.MobclickAgent;
+
 import activity.BaseActivity;
 import yomix.yt.com.myapplication.R;
 
@@ -30,5 +33,18 @@ public class RfidActivity extends BaseActivity {
         textView.setText(value == 0 ? "连接失败" : "连接中");
         parent.setBackgroundColor(value == 0 ? getResources().getColor(R.color.fail) : getResources().getColor(R.color.success));
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("RfidActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("RfidActivity");
+        MobclickAgent.onPause(this);
     }
 }

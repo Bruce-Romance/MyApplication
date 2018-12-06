@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,6 +35,19 @@ public class PermissionActivity extends AppCompatActivity {
     private static final int REQUEST_CODE_TAKE_PHOTO = 0x110;
     private String mCurrentPhotoPath;
     private ImageView mIvPhoto;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PermissionActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PermissionActivity");
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -2,6 +2,8 @@ package activity;
 
 import android.app.Application;
 
+import com.umeng.analytics.MobclickAgent;
+import com.umeng.commonsdk.UMConfigure;
 import com.vondear.rxtools.RxTool;
 
 import log.LogUtils;
@@ -24,13 +26,18 @@ public class MyApplication extends Application {
         LogUtils.level = 1;
         Dao.getInstance().getContext(this);
 //        ViewTarget.setTagId(R.id.imageloader_uri);
-//        LemapContext.getSingleDefault().AppName = this.getResources().getString(R.string.appName);
-//        LemapContext.getSingleDefault().DBVersion = this.getResources().getInteger(R.integer.dbVersion);
-//        LemapContext.getSingleDefault().CreateTableSql = this.getResources().getStringArray(R.array.createTableSql);
-//        LemapContext.getSingleDefault().UpgradeTableSql = this.getResources().getStringArray(R.array.upgradeTableSql);
-//        LemapContext.getSingleDefault().init(getApplicationContext(), this);
-//        //初始化数据库
-//        LemapContext.getSingleDefault().initDataBase();
-//        SQLiteDatabase database = LemapContext.getSingleDefault().getWritableDatabase();
+        /**
+         * 初始化common库
+         * 参数1:上下文，不能为空
+         * 参数2:设备类型，UMConfigure.DEVICE_TYPE_PHONE为手机、UMConfigure.DEVICE_TYPE_BOX为盒子，默认为手机
+         * 参数3:Push推送业务的secret
+         */
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "5bfcb716f1f5565a93000933");
+        //打开友盟统计SDK调试模式
+        UMConfigure.setLogEnabled(true);
+        //设置场景类型
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
+        //手动统计
+        MobclickAgent.openActivityDurationTrack(false);
     }
 }

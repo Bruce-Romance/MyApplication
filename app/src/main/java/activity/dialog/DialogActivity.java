@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.umeng.analytics.MobclickAgent;
+
 import activity.dialog.contract.DialogContract;
 import activity.dialog.presenter.DialogPresenter;
 import dialog.DialogUtils;
@@ -22,6 +24,19 @@ public class DialogActivity extends AppCompatActivity implements DialogContract.
     private DialogContract.Presenter presenter;
 
     DialogUtils utils;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("DialogActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("DialogActivity");
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

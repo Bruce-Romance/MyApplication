@@ -6,13 +6,19 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+
+import com.umeng.analytics.MobclickAgent;
+
+import act.AppUtils;
 import adapter.ViewPagerAdapter;
 import fragment.KhaZixFragment;
 import fragment.LeesinFragment;
 import fragment.YasuoFragment;
 import fragment.ZedFragment;
 import util.BottomNavigationViewHelper;
+import util.DeviceUtils;
 import yomix.yt.com.myapplication.R;
 
 /**
@@ -23,10 +29,23 @@ public class MainActivity extends AppCompatActivity {
     ViewPager viewPager;
     MenuItem menuItem;
 
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);       //统计时长
+    }
+
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //设置Session时长
+        MobclickAgent.setSessionContinueMillis(3 * 1000);
+
         final BottomNavigationView bv = findViewById(R.id.bottomView);
         //去掉底部导航栏动画效果
         BottomNavigationViewHelper.disableShiftMode(bv);
@@ -90,4 +109,5 @@ public class MainActivity extends AppCompatActivity {
 
         viewPager.setAdapter(adapter);
     }
+
 }

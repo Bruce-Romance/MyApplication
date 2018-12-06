@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import activity.reverse.contract.ReverseContract;
 import activity.reverse.presenter.ReversePresenter;
 import yomix.yt.com.myapplication.R;
@@ -16,6 +18,19 @@ public class ReverseActivity extends AppCompatActivity implements ReverseContrac
     private TextView tv_result;
 
     private ReverseContract.Presenter presenter;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("ReverseActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("ReverseActivity");
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

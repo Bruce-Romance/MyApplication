@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.List;
 
@@ -46,5 +47,18 @@ public class RecyclerActivity extends AppCompatActivity implements RecyclerContr
     @Override
     public void complete(List<MainBean> list) {
         mAdapter = new MainAdapter(R.layout.rv_recycler_activity, list);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("RecyclerActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("RecyclerActivity");
+        MobclickAgent.onPause(this);
     }
 }

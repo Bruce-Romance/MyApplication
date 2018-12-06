@@ -10,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import activity.rfidPower.contract.RxContract;
 import activity.rfidPower.presenter.RxPresenter;
 import toast.ToastUtils;
@@ -27,6 +29,18 @@ public class RxActivity extends AppCompatActivity implements RxContract.View {
 
     private RxContract.Presenter presenter;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("RxActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("RxActivity");
+        MobclickAgent.onPause(this);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

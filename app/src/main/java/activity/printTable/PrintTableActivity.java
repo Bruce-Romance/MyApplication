@@ -4,6 +4,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.umeng.analytics.MobclickAgent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,5 +40,18 @@ public class PrintTableActivity extends AppCompatActivity implements PrintTableC
     @Override
     public void print(String string) {
         tv.setText(string);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onPageStart("PrintTableActivity");
+        MobclickAgent.onResume(this);
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPageEnd("PrintTableActivity");
+        MobclickAgent.onPause(this);
     }
 }
