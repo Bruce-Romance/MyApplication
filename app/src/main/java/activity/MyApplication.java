@@ -1,14 +1,18 @@
 package activity;
 
 import android.app.Application;
+import android.content.Context;
 
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.commonsdk.UMConfigure;
 import com.vondear.rxtools.RxTool;
 
+import org.greenrobot.greendao.database.Database;
+
+import bean.DaoMaster;
+import bean.DaoSession;
 import log.LogUtils;
 import tao.pangu.PanGu;
-import util.Dao;
 
 /**
  * @author YT
@@ -17,6 +21,9 @@ import util.Dao;
 
 public class MyApplication extends Application {
 
+    private static Context mContext;
+
+    private static DaoSession daoSession;
 
     @Override
     public void onCreate() {
@@ -24,14 +31,13 @@ public class MyApplication extends Application {
         RxTool.init(this);
         PanGu.getInstance().init(this);
         LogUtils.level = 1;
-        Dao.getInstance().getContext(this);
+
+        DaoMaster.DevOpenHelper helper = new  DaoMaster.DevOpenHelper(this, "database");
+        Database db =  helper.getWritableDb();
+        daoSession = new DaoMaster(db).newSession();
+
 //        ViewTarget.setTagId(R.id.imageloader_uri);
-        /**
-         * 初始化common库
-         * 参数1:上下文，不能为空
-         * 参数2:设备类型，UMConfigure.DEVICE_TYPE_PHONE为手机、UMConfigure.DEVICE_TYPE_BOX为盒子，默认为手机
-         * 参数3:Push推送业务的secret
-         */
+
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, "5bfcb716f1f5565a93000933");
         //打开友盟统计SDK调试模式
         UMConfigure.setLogEnabled(true);
@@ -39,5 +45,13 @@ public class MyApplication extends Application {
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         //手动统计
         MobclickAgent.openActivityDurationTrack(false);
+    }
+
+    public static DaoSession getDaoSession() {
+        return daoSession;
+    }
+
+    public static Context getApplication() {
+        return mContext;
     }
 }
