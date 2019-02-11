@@ -1,14 +1,23 @@
 package act;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+
+import java.lang.ref.WeakReference;
 
 import intent.IntentUtils;
 import log.LogUtils;
+import task.MessageInfo;
+import task.Mission;
+import task.MyAsyncTask;
 import toast.ToastUtils;
 
 /**
@@ -32,7 +41,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    private void showErrorToast(String msg) {
+    protected void showErrorToast(String msg) {
         ToastUtils.error(msg);
     }
 
@@ -41,7 +50,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    private void showNormalToast(String msg) {
+    protected void showNormalToast(String msg) {
         ToastUtils.normal(msg);
     }
 
@@ -50,7 +59,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    private void showSuccessToast(String msg) {
+    protected void showSuccessToast(String msg) {
         ToastUtils.success(msg);
     }
 
@@ -59,7 +68,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
      *
      * @param msg
      */
-    private void showWarningToast(String msg) {
+    protected void showWarningToast(String msg) {
         ToastUtils.warning(msg);
     }
 
@@ -72,7 +81,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
      * @param bundle
      * @param requestCode
      */
-    private void skipWithData(Activity activity, Class<?> cls, boolean isFinishSelf, Bundle bundle, int requestCode) {
+    protected void skipWithData(Activity activity, Class<?> cls, boolean isFinishSelf, Bundle bundle, int requestCode) {
         IntentUtils.skipDataIntent(activity, cls, isFinishSelf, bundle, requestCode);
     }
 
@@ -84,47 +93,74 @@ public abstract class PanGuActivity extends AppCompatActivity {
      * @param isFinishSelf
      * @param requestCode
      */
-    private void skipIntent(Activity activity, Class<?> cls, boolean isFinishSelf, int requestCode) {
+    protected void skipIntent(Activity activity, Class<?> cls, boolean isFinishSelf, int requestCode) {
         IntentUtils.skipIntent(activity, cls, isFinishSelf, requestCode);
     }
 
     /**
      * 日志
+     *
      * @param msg
      */
-    private void logVerbose(String msg) {
+    protected void logVerbose(String msg) {
         LogUtils.v(TAG, msg);
     }
 
     /**
      * 日志
+     *
      * @param msg
      */
-    private void logDeBug(String msg) {
+    protected void logDeBug(String msg) {
         LogUtils.d(TAG, msg);
     }
 
     /**
      * 日志
+     *
      * @param msg
      */
-    private void logInfo(String msg) {
+    protected void logInfo(String msg) {
         LogUtils.i(TAG, msg);
     }
 
     /**
      * 日志
+     *
      * @param msg
      */
-    private void logWarning(String msg) {
+    protected void logWarning(String msg) {
         LogUtils.w(TAG, msg);
     }
 
     /**
      * 日志
+     *
      * @param msg
      */
-    private void logError(String msg) {
+    protected void logError(String msg) {
         LogUtils.e(TAG, msg);
+    }
+
+
+    protected void startAsync(Context context, final MyAsyncTask task) {
+
+        new Mission() {
+            @Override
+            protected Object run(MessageInfo info) throws Exception {
+                return task.onRunning(info);
+            }
+
+            @Override
+            protected void exception(Exception e) {
+                task.onFail(e);
+            }
+
+            @Override
+            protected void complete(Object o) {
+                task.onComplete(o);
+            }
+        }.start();
+
     }
 }

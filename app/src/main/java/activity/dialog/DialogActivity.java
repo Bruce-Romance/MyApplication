@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.umeng.analytics.MobclickAgent;
 
+import act.PanGuActivity;
 import activity.dialog.contract.DialogContract;
 import activity.dialog.presenter.DialogPresenter;
 import dialog.DialogUtils;
@@ -19,7 +20,7 @@ import dialog.onEditDialogClick;
 import dialog.onMessageDialogClick;
 import yomix.yt.com.myapplication.R;
 
-public class DialogActivity extends AppCompatActivity implements DialogContract.View {
+public class DialogActivity extends PanGuActivity implements DialogContract.View {
 
     private DialogContract.Presenter presenter;
 

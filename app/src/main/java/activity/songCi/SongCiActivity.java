@@ -11,10 +11,15 @@ import com.umeng.analytics.MobclickAgent;
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import act.PanGuActivity;
 import activity.MyApplication;
 import eventbus.Event;
 import eventbus.EventBusCode;
@@ -26,32 +31,21 @@ import dialog.DialogUtils;
 import dialog.LoadDialog;
 import dialog.MessageDialog;
 import dialog.onMessageDialogClick;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import task.MessageInfo;
+import task.MyAsyncTask;
+import toast.ToastUtils;
 import yomix.yt.com.myapplication.R;
 
-public class SongCiActivity extends BaseActivity implements SongCiContract.View {
+public class SongCiActivity extends PanGuActivity implements SongCiContract.View {
 
     private TextView title, author, content;
 
     private EditText editText;
-    /*自定义耗时Dialog*/
-    private LoadDialog loadDialog;
     /*P层*/
     private SongCiContract.Presenter mPresenter;
-
-    private DialogUtils utils;
-
-    List<SongCi> list = new ArrayList<>();
-
-
-    /**
-     * 是否需要订阅Event事件
-     *
-     * @return
-     */
-    @Override
-    protected boolean isSubscribe() {
-        return true;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,41 +56,79 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
         content = findViewById(R.id.tv_content);
         editText = findViewById(R.id.edit_content);
 
-        utils = new DialogUtils();
 
         mPresenter = new SongCiPresenter(this);
-
-//        new Thread(new Runnable() {
-//            @Override
-//            public void run() {
-//                for (int i = 0; i < 50000; i++) {
-//                    SongCi s = new SongCi();
-//                    s.setAuthor("李白" + i);
-//                    s.setContent("日照香炉生紫烟，遥看瀑布挂前川.飞流直下三千尺,疑是银河落九天.");
-//                    s.setTitle("望庐山瀑布");
-//                    s.setType("这是李白五十岁左右隐居庐山时写的一首风景诗。这首诗形象地描绘了庐山瀑布雄奇壮丽的景色，反映了诗人对祖国大好河山的无限热爱。");
-//                    MyApplication.getDaoSession().insert(s);
-//                    Log.d("插入数据", "第" + i + "个");
-//                }
-//            }
-//        }).start();
 
 
         //查询
         findViewById(R.id.btn_check).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loadDialog = utils.loadDialog(SongCiActivity.this, R.style.PanGuDialog);
-//                //发送事件
-                EventBus.getDefault().post(new Event<>(EventBusCode.SongCiStart, editText.getText().toString()));
+                startAsync(SongCiActivity.this, new MyAsyncTask() {
+                    @Override
+                    public Object onRunning(MessageInfo info) throws Exception {
+
+                        return request(editText.getText().toString());
+                    }
+
+                    @Override
+                    public void onFail(Exception e) {
+                        ToastUtils.error(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete(Object o) {
+                        List<SongCi> list = (List<SongCi>) o;
+                        if (list.size() < 0) {
+                            ToastUtils.error("没有返回数据");
+                        }
+                        ToastUtils.success(list.get(0).getTitle());
+                    }
+                });
             }
         });
     }
 
-    @Override
-    protected void rfidStatus(int value) {
+    private final String URL = "http://api.jisuapi.com/songci/search?appkey=1df53fee682ab4c8&keyword=";
 
+    private List<SongCi> request(String appId) throws Exception {
+        List<SongCi> list = new ArrayList<>();
+        try {
+
+            OkHttpClient client = new OkHttpClient();
+            Request request = new Request.Builder()
+                    .url(URL + appId)
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            JSONObject object = new JSONObject(response.body().string());
+
+            if (object.getInt("status") == 0) {
+
+                JSONObject object1 = object.getJSONObject("result");
+                JSONArray jsonArray = object1.getJSONArray("list");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    SongCi songCi = new SongCi();
+                    songCi.setTitle(jsonObject.getString("title"));
+                    songCi.setType(jsonObject.getString("type"));
+                    songCi.setContent(jsonObject.getString("content"));
+                    songCi.setAuthor(jsonObject.getString("author"));
+                    list.add(songCi);
+                }
+            } else {
+                throw new Exception(object.getString("msg"));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
+        } catch (JSONException e) {
+            e.printStackTrace();
+            throw new Exception(e.getMessage());
+        }
+        return list;
     }
+
 
     /**
      * 订阅消息
@@ -115,9 +147,7 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
         super.onPause();
         MobclickAgent.onPageEnd("SongCiActivity");
         MobclickAgent.onPause(this);
-        if (loadDialog != null) {
-            loadDialog.dismiss();
-        }
+
     }
 
     @Override
@@ -125,29 +155,6 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
         super.onResume();
         MobclickAgent.onPageStart("SongCiActivity");
         MobclickAgent.onResume(this);
-    }
-
-
-    /**
-     * View层发送事件,切换到主线程处理
-     *
-     * @param event
-     */
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void subscribeSuccess(Event event) {
-        if (event.getCode() == EventBusCode.SongCiSuccess) {
-            SongCi songCi = (SongCi) event.getData();
-            title.setText(songCi.getType() + "\n\n" + songCi.getTitle());
-            author.setText(songCi.getAuthor());
-            String[] contents = songCi.getContent().split("。");
-            StringBuilder builder = new StringBuilder();
-            for (String content1 : contents) {
-                builder.append(content1).append("\n").append("\n");
-            }
-            content.setText(builder.toString());
-//            loadDialog.getLottieView().loop(false);
-            loadDialog.dismiss();
-        }
     }
 
     /**
@@ -160,23 +167,6 @@ public class SongCiActivity extends BaseActivity implements SongCiContract.View 
 //        EventBus.getDefault().post(songCi);
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void subscribeFail(Event event) {
-        if (event.getCode() == EventBusCode.SongCiFail) {
-            loadDialog.dismiss();
-            new DialogUtils().messageDialog(SongCiActivity.this, "查询失败", (String) event.getData(), false, new onMessageDialogClick() {
-                @Override
-                public void confirm(MessageDialog dialog) {
-
-                }
-
-                @Override
-                public void cancel(MessageDialog dialog) {
-
-                }
-            });
-        }
-    }
 
     @Override
     public void fail(final String errorMsg) {

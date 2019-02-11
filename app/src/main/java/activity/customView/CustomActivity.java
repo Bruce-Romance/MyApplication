@@ -1,14 +1,16 @@
 package activity.customView;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.umeng.analytics.MobclickAgent;
 
+import act.PanGuActivity;
+import task.MessageInfo;
+import task.MyAsyncTask;
+import toast.ToastUtils;
 import yomix.yt.com.myapplication.R;
 
-public class CustomActivity extends Activity {
+public class CustomActivity extends PanGuActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,11 +25,13 @@ public class CustomActivity extends Activity {
         MobclickAgent.onPageStart("CustomActivity");
         MobclickAgent.onResume(this);
     }
+
     @Override
     public void onPause() {
         super.onPause();
         MobclickAgent.onPageEnd("CustomActivity");
         MobclickAgent.onPause(this);
     }
+
 
 }
