@@ -143,7 +143,13 @@ public abstract class PanGuActivity extends AppCompatActivity {
     }
 
 
-    protected void startAsync(Context context, final MyAsyncTask task) {
+    /**
+     * 异步任务
+     *
+     * @param activity
+     * @param task
+     */
+    protected void startAsyncTask(Activity activity, final MyAsyncTask task) {
 
         new Mission() {
             @Override
@@ -160,7 +166,7 @@ public abstract class PanGuActivity extends AppCompatActivity {
             protected void complete(Object o) {
                 task.onComplete(o);
             }
-        }.start();
+        }.start(activity);
 
     }
 }

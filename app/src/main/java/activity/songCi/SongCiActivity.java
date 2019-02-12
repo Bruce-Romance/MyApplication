@@ -64,25 +64,23 @@ public class SongCiActivity extends PanGuActivity implements SongCiContract.View
         findViewById(R.id.btn_check).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startAsync(SongCiActivity.this, new MyAsyncTask() {
+                startAsyncTask(SongCiActivity.this, new MyAsyncTask() {
                     @Override
                     public Object onRunning(MessageInfo info) throws Exception {
-
-                        return request(editText.getText().toString());
+                        //子线程执行具体业务
+                        return request(info, editText.getText().toString());
                     }
 
                     @Override
                     public void onFail(Exception e) {
+                        //报错处理
                         ToastUtils.error(e.getMessage());
                     }
 
                     @Override
                     public void onComplete(Object o) {
-                        List<SongCi> list = (List<SongCi>) o;
-                        if (list.size() < 0) {
-                            ToastUtils.error("没有返回数据");
-                        }
-                        ToastUtils.success(list.get(0).getTitle());
+                        //成功处理
+                        ToastUtils.success("成功");
                     }
                 });
             }
@@ -91,7 +89,8 @@ public class SongCiActivity extends PanGuActivity implements SongCiContract.View
 
     private final String URL = "http://api.jisuapi.com/songci/search?appkey=1df53fee682ab4c8&keyword=";
 
-    private List<SongCi> request(String appId) throws Exception {
+    private List<SongCi> request(MessageInfo info, String appId) throws Exception {
+        info.setMsg("正在查询：" + appId);
         List<SongCi> list = new ArrayList<>();
         try {
 

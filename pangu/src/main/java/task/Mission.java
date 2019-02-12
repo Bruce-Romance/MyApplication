@@ -1,6 +1,7 @@
 package task;
 
-import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
@@ -17,41 +18,55 @@ public abstract class Mission {
 
     protected abstract void complete(Object o);
 
-    @SuppressLint("HandlerLeak")
-    public void start() {
+    private static final int EXCEPTION = 2;
+    private static final int COMPLETE = 3;
+    static final int MESSAGE = 4;
+
+    public void start(Activity activity) {
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        final AlertDialog dialog = builder.create();
 
         final Handler handler = new Handler(Looper.getMainLooper()) {
             @Override
             public void handleMessage(Message msg) {
                 switch (msg.what) {
-                    case 2://Exception
+                    case EXCEPTION:
                         Exception e = (Exception) msg.obj;
                         exception(e);
                         break;
-                    case 3://Complete
+                    case COMPLETE:
                         Object o = msg.obj;
                         complete(o);
+                        break;
+                    case MESSAGE:
+                        String message = (String) msg.obj;
+                        dialog.setMessage(message);
                         break;
                 }
             }
         };
-        final MessageInfo info = new MessageInfo();
-        info.setMsg("正在执行...");
+
+        final MessageInfo info = new MessageInfo(handler);
+        dialog.setMessage("正在执行...");
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
+        dialog.show();
 
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 try {
                     Object o = Mission.this.run(info);
-                    handler.sendMessage(handler.obtainMessage(3, o));
+                    handler.sendMessage(handler.obtainMessage(COMPLETE, o));
                 } catch (Exception e) {
-                    handler.sendMessage(handler.obtainMessage(2, e));
+                    handler.sendMessage(handler.obtainMessage(EXCEPTION, e));
+                } finally {
+                    dialog.dismiss();
                 }
             }
         };
 
         new Thread(runnable).start();
-
-
     }
 }
