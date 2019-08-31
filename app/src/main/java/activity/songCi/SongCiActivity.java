@@ -1,36 +1,24 @@
 package activity.songCi;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import com.umeng.analytics.MobclickAgent;
-
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import act.PanGuActivity;
-import activity.MyApplication;
 import eventbus.Event;
 import eventbus.EventBusCode;
 import bean.SongCi;
-import activity.BaseActivity;
 import activity.songCi.contract.SongCiContract;
 import activity.songCi.presenter.SongCiPresenter;
-import dialog.DialogUtils;
-import dialog.LoadDialog;
-import dialog.MessageDialog;
-import dialog.onMessageDialogClick;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -56,9 +44,7 @@ public class SongCiActivity extends PanGuActivity implements SongCiContract.View
         content = findViewById(R.id.tv_content);
         editText = findViewById(R.id.edit_content);
 
-
         mPresenter = new SongCiPresenter(this);
-
 
         //查询
         findViewById(R.id.btn_check).setOnClickListener(new View.OnClickListener() {
